@@ -1,6 +1,6 @@
 import * as Y from 'yjs'
 
-import { JSONArray, JSONObject, JSONPrimitive, JSONValue } from './types'
+import { JSONArray, JSONObject, JSONPrimitive, JSONValue } from './types.mjs'
 
 export function isJSONPrimitive(v: JSONValue): v is JSONPrimitive {
     const t = typeof v

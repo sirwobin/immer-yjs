@@ -1,5 +1,6 @@
 {
     "name": "immer-yjs-monorepo",
+    "type": "module",
     "private": true,
     "license": "MIT",
     "workspaces": [
@@ -10,7 +11,7 @@
         "test": "yarn workspace immer-yjs test",
         "publish": "yarn workspace immer-yjs npm publish",
         "release": "yarn workspace immer-yjs release",
-        "lint": "eslint --ext .js,.ts --ignore-path .gitignore --fix packages",
+        "lint": "eslint --ext .js,.ts,.mts --ignore-path .gitignore --fix packages",
         "format": "prettier . --write"
     },
     "devDependencies": {

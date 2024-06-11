@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'vitest'
 import * as Y from 'yjs'
 
-import { bind } from './immer-yjs'
-import { createSampleObject, id1, id2, id3 } from './sample-data'
+import { bind } from './immer-yjs.mjs'
+import { createSampleObject, id1, id2, id3 } from './sample-data.mjs'
 
 test('bind usage demo', () => {
     const doc = new Y.Doc()
@@ -66,7 +66,7 @@ test('bind usage demo', () => {
 
     // changed properties should reflect what we did in update(...)
     expect(snapshot2[id1].ppu).toStrictEqual(0.65)
-    expect(snapshot2[id1].topping.find((x) => x.id === '9999')).toStrictEqual({ id: '9999', type: 'test3' })
+    expect(snapshot2[id1].topping.find((x: any) => x.id === '9999')).toStrictEqual({ id: '9999', type: 'test3' })
     expect(snapshot2[id3]).toBeUndefined()
 
     // reference changed as well

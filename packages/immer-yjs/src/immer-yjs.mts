@@ -1,8 +1,8 @@
-import produce, { enablePatches, Patch, produceWithPatches } from 'immer'
+import { produce, enablePatches, Patch, produceWithPatches } from 'immer'
 import * as Y from 'yjs'
 
-import { JSONArray, JSONObject, JSONValue } from './types'
-import { isJSONArray, isJSONObject, notImplemented, toPlainValue, toYDataType } from './util'
+import { JSONArray, JSONObject, JSONValue } from './types.mjs'
+import { isJSONArray, isJSONObject, notImplemented, toPlainValue, toYDataType } from './util.mjs'
 
 enablePatches()
 
@@ -12,7 +12,7 @@ function applyYEvent<T extends JSONValue>(base: T, event: Y.YEvent<any>) {
     if (event instanceof Y.YMapEvent && isJSONObject(base)) {
         const source = event.target as Y.Map<any>
 
-        event.changes.keys.forEach((change, key) => {
+        event.changes.keys.forEach((change: any, key: any) => {
             switch (change.action) {
                 case 'add':
                 case 'update':
@@ -27,7 +27,7 @@ function applyYEvent<T extends JSONValue>(base: T, event: Y.YEvent<any>) {
         const arr = base as unknown as any[]
 
         let retain = 0
-        event.changes.delta.forEach((change) => {
+        event.changes.delta.forEach((change: any) => {
             if (change.retain) {
                 retain += change.retain
             }
@@ -47,9 +47,9 @@ function applyYEvent<T extends JSONValue>(base: T, event: Y.YEvent<any>) {
 }
 
 function applyYEvents<S extends Snapshot>(snapshot: S, events: Y.YEvent<any>[]) {
-    return produce(snapshot, (target) => {
+    return produce(snapshot, (target: any) => {
         for (const event of events) {
-            const base = event.path.reduce((obj, step) => {
+            const base = event.path.reduce((obj: any, step: any) => {
                 // @ts-ignore
                 return obj[step]
             }, target)

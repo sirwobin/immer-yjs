@@ -1,13 +1,19 @@
-import * as path from 'path'
+import path from 'node:path'
 import { defineConfig } from 'vite'
-import dts from 'vite-dts'
+// import dts from 'vite-dts'
 
 export default defineConfig({
     build: {
         lib: {
-            entry: path.resolve(__dirname, 'src/index.ts'),
+            entry: path.resolve(__dirname, 'src/index.mts'),
             name: 'immer-yjs',
             formats: ['es', 'umd'],
+            fileName: (format, entryName) => {
+                if (format === 'es') {
+                    return `${entryName}.mjs`;
+                } else { }
+                return `${entryName}.${format}.js`
+            }
         },
         rollupOptions: {
             external: ['yjs', 'immer'],
@@ -27,5 +33,5 @@ export default defineConfig({
         // Leave minification up to applications.
         minify: false,
     },
-    plugins: [dts()],
+    // plugins: [dts()],
 })
